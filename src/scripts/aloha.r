@@ -3,14 +3,10 @@ sim <- function(p, q, nreps){
     count_x2_eq_2 <- 0
     count_x1_eq_1 <- 0
     count_x1_eq_2 <- 0
-    
     count_x2_eq_2_given_x1_eq_1 <- 0
 
     for(i in 1:nreps){
         numsend <- 0 #no messages sent so far
-        X1 <- 0
-        X2 <- 0
-
         #Simulate A and B's decision whether to send in Epoch 1
         for (j in 1:2){
             #simulate sending of message for each node
@@ -23,7 +19,7 @@ sim <- function(p, q, nreps){
         if(numsend == 1){
             X1 <- 1
         } else {
-            X1 <- 2
+            X1 <- 2 #either both sent messages and or neither did
         }
 
         #increment count of x1 count for 1 and 2 messages sent.
@@ -31,13 +27,13 @@ sim <- function(p, q, nreps){
             count_x1_eq_2 <- count_x1_eq_2 + 1
         }
 
-        #Simulate A and B's decision whether to send in Epoch 2
         num_active <- X1
-        if(X1 == 1){
-            if(runif(1) < q){
-                num_active <- num_active + 1
-            }
+        
+        #Simulate A and B's decision whether to send in Epoch 2        
+        if(X1 == 1 && runif(1) < q){
+            num_active <- num_active + 1
         }
+
 
         if(num_active == 1){
             #try sending message
@@ -46,18 +42,18 @@ sim <- function(p, q, nreps){
             } else {
                 X2 <- 1 #message was not sent
             }
-        } else {
+        } else { #num_active = 2
             num_send <- 0
-            for(i in 1:2){
+            for(j in 1:2){
                 if(runif(1) < p){
                     num_send <- num_send + 1
                 }
             }
 
             if(num_send == 1){
-                X2 == 1 #one message was sent, hence one node became inactive
+                X2 = 1 #one message was sent, hence one node became inactive
             } else {
-                X2 == 2 #message was not sent due to collission
+                X2 = 2 #message was not sent due to collission
             }
         }
 
