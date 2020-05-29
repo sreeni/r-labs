@@ -1,4 +1,4 @@
-#ALOHA SIM Finds P(X1=2) P(X2=2) P(X1=1|X2=2)
+#ALOHA SIM Finds P(X1=2) P(X2=2) P(X2 = 2|X1 = 1)
 sim <- function(p, q, nreps){
     count_x2_eq_2 <- 0
     count_x1_eq_1 <- 0
@@ -19,9 +19,9 @@ sim <- function(p, q, nreps){
         if(numsend == 1){
             X1 <- 1
         } else {
-            X1 <- 2 #either both sent messages and or neither did
+            X1 <- 2 #neither got sent
         }
-
+        
         #increment count of x1 count for 1 and 2 messages sent.
         if(X1 == 2){
             count_x1_eq_2 <- count_x1_eq_2 + 1
@@ -53,7 +53,7 @@ sim <- function(p, q, nreps){
             if(num_send == 1){
                 X2 = 1 #one message was sent, hence one node became inactive
             } else {
-                X2 = 2 #message was not sent due to collission
+                X2 = 2 #message was not sent due to collision
             }
         }
 
@@ -75,4 +75,5 @@ sim <- function(p, q, nreps){
     cat("P(X2 = 2 | X1 = 1) ", count_x2_eq_2_given_x1_eq_1/count_x1_eq_1, "\n")
 }
 
-sim(0.4, 0.8, 1000)
+sim(0.4, 0.8, 1000000000)
+
