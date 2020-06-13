@@ -4,8 +4,10 @@ flipCoin <- function(nFlips, pHead){
 }
 
 areThereConsecutiveHeads <- function(kHeads, flippedCoins){
-  pattern = c(array(0, kHeads),1)
-  expected = paste(pattern, collapse="")
+  kHeadsWithTailTermination = c(array(0, kHeads),1)
+  kHeadsEndOfString = c('.*?',array(0,kHeads))
+  expected = paste(kHeadsWithTailTermination,"|",kHeadsEndOfString, collapse="")
+  cat(fill=TRUE, "expected pattern", expected)
   actual = paste(flippedCoins, collapse="")
   match <- grepl(pattern=expected, x=actual, fixed=TRUE)
   return (match)
