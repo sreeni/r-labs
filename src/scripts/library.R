@@ -6,12 +6,14 @@ waitUntil <- 6
 simulateLibraryReturn <- function(nTrials){
     bookReturns <- sample(days, size = nTrials,replace = TRUE, prob = probs )
     foreignLibIndicators  <- sample(c(0,1), size = nTrials, replace = TRUE)
-    bookReturnsWithDelays <- bookReturns + 2*foreignLibIndicators
+    foreignLibraryDelay = 2
+    bookReturnsWithDelays <- bookReturns + foreignLibraryDelay * foreignLibIndicators
 
-    notebook <-cbind(bookReturnsWithDelays, foreignLibIndicators, bookReturns)
+    notebook <- cbind(bookReturns, foreignLibIndicators, bookReturnsWithDelays)
     
     delayedBookReturns <- notebook[bookReturnsWithDelays > currentDay,]
     #delayedBookReturns <- bookReturnsWithDelays[bookReturnsWithDelays > currentDay] 
+    
     result <- mean(delayedBookReturns[,3] == waitUntil)
     #
     #result <- mean(delayedBookReturns == waitUntil)
