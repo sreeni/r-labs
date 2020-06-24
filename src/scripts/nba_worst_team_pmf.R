@@ -2,7 +2,6 @@ println <-function(...){
   cat(..., fill = T)
 }
 
-println("test", 1, 2, 3, 4, 5)
 generateBalls <- function(){
   bag <- c()
   for(i in 1:11){
@@ -17,7 +16,7 @@ isThirdPick <- function(balls){
     if(balls[i] == balls[i+1]){
       i <- i + 1
     } else if(balls[i+2] == 11) {
-      println("3rd pick at ", balls[1:5])
+      #println("3rd pick at ", balls[1:5])
         return(TRUE)
     } else {
       return (FALSE)
@@ -47,11 +46,11 @@ nbaSimulation <- function (nTrials){
     }
   }
   
-  println("count_x_1", count_x_1/nTrials)
-  println("count_x_2", count_x_2/nTrials)
-  println("count_x_3", count_x_3/nTrials)
+  println("p_x_1", count_x_1/nTrials)
+  println("p_x_2", count_x_2/nTrials)
+  println("p_x_3", count_x_3/nTrials)
   p_x_4 <- (1-(count_x_1 + count_x_2 +count_x_3)/nTrials)
-  println("count_x_4", p_x_4)
+  println("p_x_4", p_x_4)
 }
 
 nbaSimulation(1000)
