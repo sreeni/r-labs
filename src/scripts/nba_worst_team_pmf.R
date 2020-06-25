@@ -1,13 +1,16 @@
+# NOTE: install purrr package before running this program.
+
 println <-function(...){
   cat(..., fill = T)
 }
 
+ballsOfSameType <- function(i){
+  array(i,i)
+}
+
 generateBalls <- function(){
-  bag <- c()
-  for(i in 1:11){
-    bag <- c(bag, array(i,i))
-  }
-  bag
+   listOfBalls <- purrr::map(.x = seq(1,11), .f = ballsOfSameType)
+   purrr::as_vector(listOfBalls)
 }
 
 isThirdPick <- function(balls){
