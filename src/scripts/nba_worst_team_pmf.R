@@ -18,8 +18,7 @@ isThirdPick <- function(balls){
   while(i <= length(balls)){
     if(balls[i] == balls[i+1]){
       i <- i + 1
-    } else if(balls[i+2] == 11) {
-      #println("3rd pick at ", balls[1:5])
+    } else if(balls[i+2] == 11) { #3rd unique ball is 11
         return(TRUE)
     } else {
       return (FALSE)
