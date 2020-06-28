@@ -13,22 +13,13 @@ generateBalls <- function(){
    purrr::as_vector(listOfBalls)
 }
 
-isThirdPick <- function(balls){
-  i <- 1
-  while(i <= length(balls)){
-    if(balls[i] == balls[i+1]){
-      i <- i + 1
-    } else if(balls[i+2] == 11) { #3rd unique ball is 11
-        return(TRUE)
-    } else {
-      return (FALSE)
-    }
-  }
-  return(FALSE)
-}
-
 pickBalls <- function(){
   sample(generateBalls(), 66, replace = FALSE)  
+}
+
+nthPick <- function(balls, n){
+  indexOfWorstTeam <- which(unique(balls) == 11)
+  indexOfWorstTeam == n
 }
 
 nbaSimulation <- function (nTrials){
@@ -41,10 +32,12 @@ nbaSimulation <- function (nTrials){
     balls <- pickBalls()
     if(balls[1] == 11){
       count_x_1 <- count_x_1 + 1
-    } else if(balls[2] == 11){
+    } else if(nthPick(balls, 2)){
+      #println("2nd pick", balls[1:10])
       count_x_2 <- count_x_2 + 1
-    } else if(isThirdPick(balls)) {
-        count_x_3 <- count_x_3 + 1
+    } else if(nthPick(balls, 3)) {
+      #println("3rd pick", balls[1:10])
+      count_x_3 <- count_x_3 + 1
     }
   }
   
@@ -55,4 +48,4 @@ nbaSimulation <- function (nTrials){
   println("p_x_4", p_x_4)
 }
 
-nbaSimulation(1000)
+nbaSimulation(10000)
